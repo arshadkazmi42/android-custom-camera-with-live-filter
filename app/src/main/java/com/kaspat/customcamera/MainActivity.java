@@ -1,16 +1,22 @@
 package com.kaspat.customcamera;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final String TAG = MainActivity.class.getSimpleName();
     private Camera mCamera;
     private HorizontalScrollView horizontalScrollView;
+    private int PERMISSION_CALLBACK_CONSTANT = 1000;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,15 +39,62 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ImageView ivFilter = (ImageView) findViewById(R.id.ivFilter);
         horizontalScrollView = (HorizontalScrollView) findViewById(R.id.hscFilterLayout);
 
+        checkAndGivePermission();
+
+        ivCapture.setOnClickListener(this);
+        ivFilter.setOnClickListener(this);
+    }
+    
+    private void checkAndGivePermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED &&
+                checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    PERMISSION_CALLBACK_CONSTANT);
+        } else {
+            initialize();
+        }
+    }
+
+    private void initialize() {
         mCamera = getCameraInstance();
         CameraPreview mPreview = new CameraPreview(this, mCamera);
         FrameLayout rlCameraPreview = (FrameLayout) findViewById(R.id.rlCameraPreview);
         if (rlCameraPreview != null) {
             rlCameraPreview.addView(mPreview);
         }
+    }
 
-        ivCapture.setOnClickListener(this);
-        ivFilter.setOnClickListener(this);
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == PERMISSION_CALLBACK_CONSTANT){
+            boolean allgranted = false;
+            for(int i=0;i<grantResults.length;i++){
+                if(grantResults[i] == PackageManager.PERMISSION_GRANTED){
+                    allgranted = true;
+                } else {
+                    allgranted = false;
+                    break;
+                }
+            }
+
+
+            if(allgranted){
+                initialize();
+            } else if(ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,Manifest.permission.CAMERA)){
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    requestPermissions(new String[]{Manifest.permission.CAMERA},PERMISSION_CALLBACK_CONSTANT);
+                }
+            } else if(ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    },PERMISSION_CALLBACK_CONSTANT);
+                }
+            } else {
+                Toast.makeText(MainActivity.this,"Permission is mandatory, Try giving it from App Settings",Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     @Override
@@ -169,14 +223,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onPause() {
         super.onPause();
-        mCamera.stopPreview();
-        mCamera.release();
+        if(mCamera != null) {
+            mCamera.stopPreview();
+            mCamera.release();
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mCamera.release();
-        mCamera = null;
+        if(mCamera != null) {
+            mCamera.release();
+            mCamera = null;
+        }
     }
 }
