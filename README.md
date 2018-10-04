@@ -31,5 +31,4 @@ Windows:
 The output apk will be in `/app/build/outputs/apk/release`.
 Transfer the apk to your device and install it to use the application.
 
-## Note
-* Permissions are requested at the initial splash screen. Do not deny the permission after, as it will cause the app to not function correctly.
+
