@@ -1,34 +1,43 @@
-# Android Custom Camera With Live Filter
-Simple custom camera application with live filters feature.
-It lets users make use of filters at the same time they're seeing the image from camera
+<h2 align="center"><b>Android Live Filters Camera</b></h2>
+<h4 align="center">A Simple, Custom Camera With Live Filters</h4>
 
+## ScreenShots
+
+<h4 align="center">
+Screenshots coming soon...
+</h4>
+
+## Features
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/75ad4b69e2cb402ba8bf82e919a17157)](https://www.codacy.com/app/arshadkazmi42/android-custom-camera-with-live-filter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=arshadkazmi42/android-custom-camera-with-live-filter&amp;utm_campaign=Badge_Grade)
+* Custom Android Camera Application
+* Live Filters shown at the same time the user is using the camera
 
-<b>Note:</b>
 ## Getting Started
 
-_Follow these instructions to build and run the project.._
+Follow these instructions to build and run the project:
 
 1. Clone this repository.
-3. [Install Android Studio](https://developer.android.com/sdk/index.html).
-5. Import the project. Open Android Studio, click `Open an existing Android
-   Studio project` and select the project. Gradle will build the project.
-6. Run the app. Click `Run > Run 'app'`. After the project builds you'll be
-   prompted to build or launch an emulator.
+2. [Install Android Studio](https://developer.android.com/sdk/index.html).
+3. Import the project into Android Studio:
+   1. Open Android Studio
+   2. Click `Open an existing Android Studio project`
+   3. Select the project
+4. Android Studio will import the project and Gradle will build the project.
+5. Run the application:
+   1. Click `Run > Run 'app'`
+   2. After the project builds you'll be prompted to build or launch an emulator.
 
 ### Build with gradle
 
-If you donot have Android Studio, you can build your app with gradle
+If you do not have Android Studio, but you have [Gradle](https://gradle.org/install/) installed, you can build your app with gradle directly:
 
-OS X & Linux:
+**OS X & Linux**:
 
 `./gradlew assembleRelease`
 
-Windows:
+**Windows**:
 
 `gradlew.bat assembleRelease`
 
 The output apk will be in `/app/build/outputs/apk/release`.
 Transfer the apk to your device and install it to use the application.
-
-
