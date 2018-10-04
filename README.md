@@ -4,7 +4,6 @@ It lets users make use of filters at the same time they're seeing the image from
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/75ad4b69e2cb402ba8bf82e919a17157)](https://www.codacy.com/app/arshadkazmi42/android-custom-camera-with-live-filter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=arshadkazmi42/android-custom-camera-with-live-filter&amp;utm_campaign=Badge_Grade)
 
-<b>Note:</b>
 ## Getting Started
 
 _Follow these instructions to build and run the project.._
