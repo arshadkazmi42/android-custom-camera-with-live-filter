@@ -35,9 +35,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ImageView ivCapture = (ImageView) findViewById(R.id.ivCapture);
-        ImageView ivFilter = (ImageView) findViewById(R.id.ivFilter);
-        horizontalScrollView = (HorizontalScrollView) findViewById(R.id.hscFilterLayout);
+        ImageView ivCapture = findViewById(R.id.ivCapture);
+        ImageView ivFilter = findViewById(R.id.ivFilter);
+        horizontalScrollView = findViewById(R.id.hscFilterLayout);
 
         checkAndGivePermission();
 
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initialize() {
         mCamera = getCameraInstance();
         CameraPreview mPreview = new CameraPreview(this, mCamera);
-        FrameLayout rlCameraPreview = (FrameLayout) findViewById(R.id.rlCameraPreview);
+        FrameLayout rlCameraPreview = findViewById(R.id.rlCameraPreview);
         if (rlCameraPreview != null) {
             rlCameraPreview.addView(mPreview);
         }
