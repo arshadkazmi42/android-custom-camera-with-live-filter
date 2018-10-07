@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CustomCamera.iml" filepath="$PROJECT_DIR$/CustomCamera.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-custom-camera-with-live-filter.iml" filepath="$PROJECT_DIR$/android-custom-camera-with-live-filter.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
